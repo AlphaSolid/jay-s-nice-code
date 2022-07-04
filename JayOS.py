@@ -1,46 +1,53 @@
+import os
 import time
+import datetime
 from random import randint
-def minimathgame():
-    print('there are 50 numbers.Try to guess them!')
-    MIN_NUMBER = 1
-    MAX_NUMBER = 50
-    random_number = randint(MIN_NUMBER,MAX_NUMBER)
-    flag = 0
-    NO_OF_GUESSES = 3
-    while NO_OF_GUESSES > 0:
-        guess = int(input('Guess a number from %d-%d :' %(MIN_NUMBER, MAX_NUMBER)))
-        if guess == random_number:
-            flag = 1
-            break
-        elif guess < random_number:
-            print('Your guess is too low!')
-        else:
-            print('Your guess is too high')
-        NO_OF_GUESSES -= 1
-    if flag == 1:
-        print('Congratulation!')
-    else:
-        print('Game Over! The number is', random_number)
-def loadingscreen():
-    print('   .....   ')
-    print(' ..     ..')
-    print(' ..     ..')
-    print('   .....   ')
-def JayOSstartup():
-    loadingscreen()
-    time.sleep(3)
-    print('initializing startup...performing virus scan...performing checks...')
-    time.sleep(5)
-    print('Jay.exe loaded   OSystem.exe loaded   Pythoninterperter.exe loaded...')
-    time.sleep(5)
-    print('                      JAYOS LOADED                                   ')
-    print('           Jaycorps pte ltd  all rights reserved@2019                ')
-    print('                          WELCOME                                    ')
+
+def startup():
+    os.system('cls||clear')
+    print('Initializing startup... Performing virus scan... Performing checks...')
+    print('')
     time.sleep(2)
+    print('            [][][]  [][]   []    []     _______           ')
+    print('              []   []  []   []  []     |       |          ')
+    print('          []  []  [][][][]    []       |   S   |          ')
+    print('           [][]  []      []   []       |_______|          ')
+    print('')
+    print('Copyright @ 2022 Jay Operating System.  All Rights Reserved')
+    print('')
+    time.sleep(2)
+    print('Logged in as \'user\' on {}'.format(datetime.datetime.now()))
+    startscreen()
+
 def startscreen():
-    print('Hello there!What would you like to do?')
-    print('Remember, you have to write everything the same as what we say, for example, I say "hi",you can only write "hi" or "Hi".')
-    print('please select any of these activities!')
+    print('Welcome back, user. What would you like to do today?')
+    while True:
+        print('')
+        global inp
+        inp = raw_input('$user ')
+        if inp == 'help':
+            help()
+        elif inp == 'ls':
+            ls()
+        elif inp.startswith('open'):
+            open()
+        else:
+            print('No such command. Enter \'help\' to list the available commands')
+
+def help():
+    cmddict = {
+        "help": "List of available commands (this)",
+        "ls": "List apps and files in OS",
+        "open": "Open files"
+    }
+    for x, y in cmddict.items():
+        print(x + ": " + y)
+
+def ls():
+    filelist = ['guessthenumber', 'void']
+    for x in filelist:
+        print(x)
+    '''
     print('File_explorer    Google_chrome    Recycling_bin    Jaycorps_bestantivirus')
     time.sleep(4)
     act = input('Please select.')
@@ -49,5 +56,55 @@ def startscreen():
         print('There is nothing here...Wait, nevermind.There is a folder called "games". Go inside?')
         gameact = input('Yes or No?')
         if gameact == Yes or yes:
-            littlenumbergame()
-startscreen()
+            guessthenumber()
+    '''
+
+def open():
+
+    def guessthenumber():   
+        min = 1
+        max = 100
+        num = randint(min, max)
+        flag = False
+        tries = 5
+        print('A number was picked between {} to {}, try guessing it within your limited number of tries'.format(min, max))
+        while tries > 0:
+            guess = input('{} tries left: '.format(tries))
+            if isinstance(guess, int):
+                if guess == num:
+                    flag = True
+                    break
+                elif guess < num:
+                    print('The number is higher than that.')
+                elif guess > num:
+                    print('The number is lower than that.')
+                print('')
+                tries -= 1
+            else:
+                print('That is not a number')
+
+        if flag == True:
+            print('Congratulations! You\'ve guessed correctly!')
+        else:
+            print('You have exceeded the maximum number of tries, the number is ' + str(num))
+
+    if inp.startswith('guessthenumber', 5, 19):
+        print('---------------------------------------------------------------------------------------------')
+        guessthenumber()
+        print('---------------------------------------------------------------------------------------------')
+    elif inp.startswith('void', 5, 9):
+        print('---------------------------------------------------------------------------------------------')
+        print('This file is actually a temporary placeholder, it might be removed later')
+        print('---------------------------------------------------------------------------------------------')
+    else:
+        print('Syntax: \"open (file)\"')
+
+startup()
+
+'''
+def loadingscreen():
+    print('   .....   ')
+    print(' ..     ..')
+    print(' ..     ..')
+    print('   .....   ')
+'''
